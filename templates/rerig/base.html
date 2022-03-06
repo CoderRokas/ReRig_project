@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>
+            {% block title_block %}
+                Welcome to ReRig!
+            {% endblock %}
+        </title>
+
+        <div>
+            {% block navbar_block %}
+                <ul id="navbar">
+                    <li><a href="{% url 'rerig:index' %}">Home</a></li>
+                    <li><a href="{% url 'rerig:about' %}">About</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'rerig:account' %}">Account</a></li>
+                        <li><a href="{% url 'rerig:logout' %}">Log out</a></li>
+                    {% else %}
+                        <li><a href="{% url 'rerig:login' %}">Login</a></li>
+                        <li><a href="{% url 'rerig:register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            {% endblock %}
+        </div>
+    </head>
+
+    <body>
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+    </body>
+
+</html>
