@@ -13,9 +13,9 @@
         <div>
             {% block navbar_block %}
                 <ul id="navbar">
-                    <li><a href="{% url 'rerig:index' %}">Home</a></li>
-                    <li><a href="{% url 'rerig:about' %}">About</a></li>
-                    
+                    <li><button id="homeButton" onclick="goHome()">Home</button></li>
+                    <li><button id="aboutButton" onclick="goToAbout()">About</button></a></li>
+                    <!--
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'rerig:account' %}">Account</a></li>
                         <li><a href="{% url 'rerig:logout' %}">Log out</a></li>
@@ -23,6 +23,7 @@
                         <li><a href="{% url 'rerig:login' %}">Login</a></li>
                         <li><a href="{% url 'rerig:register' %}">Register</a></li>
                     {% endif %}
+                    -->
                 </ul>
             {% endblock %}
         </div>
@@ -33,6 +34,10 @@
             {% block body_block %}
             {% endblock %}
         </div>
+
+
+        <script src="{% static 'js/rerigBase.js' %}" crossorigin="anonymous"></script>
+
     </body>
 
 </html>
