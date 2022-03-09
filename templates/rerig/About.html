@@ -1,17 +1,15 @@
 <!DOCTYPE html>
+{% extends 'rerig/base.html' %}
+{% load staticfiles %}
 
 <html>
-    <head>
-        <title>ReRig: Home</title>
-    </head>
+    {% block title_block %}
+        About ReRig
+    {% endblock %}
     
-    <body>
-        <h1>ReRig</h1>
-        <div>
-            What about us? What about us? What abooout us? <br />
-        </div>
-        <div>
-            <a href="/rerig/">Home</a><br />
-        </div>
-    </body>
+    {% block body_block %}
+        <p>This is the about us page.</p>
+
+
+    {% endblock %}
 </html>
