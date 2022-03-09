@@ -1,16 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 class User(models.Model):
     NAME_MAX_LENGTH = 30
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    username = models.CharField(max_length=NAME_MAX_LENGTH)
+    username = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
     password = models.CharField(max_length=NAME_MAX_LENGTH)
     # picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.username
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -30,3 +30,6 @@ class Review(models.Model):
     score = models.IntegerField()
     comment = models.CharField(max_length=200)
     date = models.DateField()
+
+    def __str__(self):
+        return self.comment
