@@ -57,7 +57,7 @@ def register(request):
     return render(request, 'rerig/register.html', context={'user_form':user_form, 'registered':registered})
 
 @login_required
-def account(request):
+def account(request, username_slug):
     return render(request, 'rerig/account.html')
 
 def search(request):
