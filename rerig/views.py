@@ -4,8 +4,9 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
-from rerig.forms import UserForm
+from rerig.forms import UserForm,PostForm
 from rerig.models import Post,Review
 
 def index(request):
@@ -79,6 +80,18 @@ def show_post(request):
 
 @login_required
 def add_post(request):
-    return(request, 'rerig/add_post.html')
+    if request.method == 'POST':
+        post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post = post_form.save()
+            post.user = User.username
+            return render(request , 'rerig/post.html')
+        else:
+            print(post_form.errors)
+    else:
+        post_form = PostForm()
+    
+    context_dict = {'post_form': post_form}
+    return render (request, 'rerig/add_post.html', context=context_dict)
 
 # Create your views here.
