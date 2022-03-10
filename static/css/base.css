@@ -1,0 +1,10 @@
+h1 {
+    font-size: xx-large;
+    text-align: center;
+    color: blueviolet;
+}
+
+ul > li {
+    display: inline-block;
+}
+
