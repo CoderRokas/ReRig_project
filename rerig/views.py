@@ -69,6 +69,7 @@ def search(request):
 
     return render(request, 'rerig/search.html', context=context_dict)
 
+@login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('rerig:index'))

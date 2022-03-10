@@ -19,7 +19,7 @@ function goToLogin() {
 }
 
 function logout() {
-    //need to figure this part out still
+    window.location = '/rerig/logout'
 }
 
 function register() {
