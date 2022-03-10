@@ -8,12 +8,27 @@
     {% endblock %}
     
     {% block navbar_block %}
-        <!--Will have a different navbar still to implement-->
+        <ul id="navbar">
+            <li><button id="homeButton" onclick="goHome()">Home</button></li>
+            <li><button id="aboutButton" onclick="goToAbout()">About</button></a></li>
+            <li><button id="searchButton" onclick="goToSearch()">Search</button></a></li>
+            <li><button id="registerButton" onclick="register()">Register</button></li>
+        </ul>
     {% endblock %}
 
     {% block body_block %}
-        <p>This is the Login page.</p>
-
+        <form id="login_form" method="post" action="{% url 'rerig:login' %}">
+            {% csrf_token %}
+            Username: <input type="text" name="username" value="" size="50" />
+            <br />
+            Password: <input type="password" name="password" value="" size="50" />
+            <br />
+            <input type="submit" value="submit" />
+            <br />
+            <p>Or click here to sign up:</p>
+            <br />
+            <a href="{% url 'rerig:register' %}">Register</a>
+        </form>
 
     {% endblock %}
 </html>

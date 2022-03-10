@@ -4,16 +4,34 @@
 
 <html>
     {% block title_block %}
-        Register!
+       Login
     {% endblock %}
     
     {% block navbar_block %}
-        <!--Will have a different navbar still to implement-->
+        <ul id="navbar">
+            <li><button id="homeButton" onclick="goHome()">Home</button></li>
+            <li><button id="aboutButton" onclick="goToAbout()">About</button></a></li>
+            <li><button id="searchButton" onclick="goToSearch()">Search</button></a></li>
+            <li><button id="loginButton" onclick="goToLogin()">Login</button></li>
+        </ul>
     {% endblock %}
 
     {% block body_block %}
-        <p>This is the Register page.</p>
+        {% if registered %}
+            <strong>thank you for registering!</strong>
+            <a href="{% url 'rerig:index' %}">Return to the homepage.</a><br />
+        {% else %}
+            <strong>register here!</strong><br />
+            <form id="user_form" method="post" action="{% url 'rerig:register' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
 
-
+            <input type="submit" name="submit" value="Register" />
+            <p>Or click here to login:</p>
+            <br />
+            <a href="{% url 'rerig:login' %}">Login</a>
+        </form>
+        {% endif %}
     {% endblock %}
 </html>
