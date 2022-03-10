@@ -3,6 +3,10 @@
 {% load staticfiles %}
 
 <!-- Since this extends the base.html file we don't want to touch the title or navbar here as the base version will suffice for the index page -->
+{% block header_block %}
+    <h1>Welcome to Rerig!</h1>
+{% endblock %}
+
 
 {% block body_block %}
 
