@@ -6,5 +6,19 @@ h1 {
 
 ul > li {
     display: inline-block;
+    
 }
+
+.button1 {
+    background-color: transparent;
+    border: 0ch;
+}
+
+.button1:hover {
+    color: blueviolet;
+}
+
+body {
+    background-color: beige;
+  }
 
