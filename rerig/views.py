@@ -11,6 +11,11 @@ from rerig.models import Post,Review
 
 def index(request):
     context_dict = {}
+
+    post_list = Post.objects.order_by('-averageRating')[:5]
+
+    context_dict['posts'] = post_list
+    
     return render(request, 'rerig/index.html', context=context_dict)
 
 
