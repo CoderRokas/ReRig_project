@@ -13,8 +13,21 @@
     <!-- photo carousel to go here -->
 
     <div id="Container">
+        <h2>The most liked photos:</h2>
+        <div id="carousel"> 
+            {% if posts %}
+                {% for post in posts %}
+                    <div id="carousel-item"> 
+                        <p>{{ post.title }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <strong>There are no posts present.</strong>
+            {% endif %}
+        </div>
+
         <!-- The viewMoreRigs function should redirect the search page-->
-        <button id="morerigsbutton" onclick="goToSearch()">More Rigs!</button>
+        <button class="button2" id="moreRigsButton" onclick="goToSearch()">More Rigs!</button>
     </div>
 
 {% endblock %}

@@ -27,6 +27,8 @@ class Post(models.Model):
     averageRating = models.IntegerField(default=0)
     category = models.CharField(max_length=50)
     date = models.DateField()
+    # post will need an image field, right now index just shows the title as
+    # a proof of concept
 
     def __str__(self):
         return self.title
