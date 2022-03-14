@@ -1,23 +1,13 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    NAME_MAX_LENGTH = 30
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    username = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    password = models.CharField(max_length=NAME_MAX_LENGTH)
-    # picture = models.ImageField(upload_to='profile_images', blank=True)
-    slug = models.SlugField()
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(default='profile_images/default.png', upload_to='profile_images')
     
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.username)
-        super(User, self).save(*args, **kwargs)
-
-
     def __str__(self):
-        return self.username
+        return str(self.user.username)
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -27,8 +17,7 @@ class Post(models.Model):
     averageRating = models.IntegerField(default=0)
     category = models.CharField(max_length=50)
     date = models.DateField()
-    # post will need an image field, right now index just shows the title as
-    # a proof of concept
+    picture = models.ImageField(default='post_images/default.png', upload_to='post_images')
 
     def __str__(self):
         return self.title
