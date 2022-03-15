@@ -4,10 +4,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE','rerig_project.settings')
 
 import django
 django.setup()
-from rerig.models import User, Post, Review
+from rerig.models import Post, Review
+from django.contrib.auth.models import User
 
 def populate():
-	users = [
+	new_users = [
 		{'username' : 'Bob', 'password' : '123'},
 		{'username' : 'Alex', 'password' : 'abc'},
 		{'username' : 'Tom', 'password' : 'password'},
@@ -29,9 +30,9 @@ def populate():
 		{'username' : 'Bob', 'post_title' : 'post2', 'score' : 2, 'comment' : 'This is average', 'date':datetime.datetime(2020,5,10)}
 	]
 
-	for user in users:
-		u = add_user(user['username'], user['password'])
-		users_objects[user['username']] = u
+	for new_user in new_users:
+		u = add_user(new_user['username'], new_user['password'])
+		users_objects[new_user['username']] = u
 	
 	for post in posts:
 		p = add_post(users_objects[post['username']], post['title'], post['description'], post['averageRating'], post['category'], post['date'])
@@ -45,38 +46,34 @@ def populate():
 	# 		print(f'- {c}: {p}')
 	for u in User.objects.all():
 		print(u, 'posts:')
-		for p in Post.objects.filter(user=u):
+		for p in Post.objects.filter(author=u):
 			print('-',p)
 		
 		print(u, 'reviews:')
-		for r in Review.objects.filter(user=u):
+		for r in Review.objects.filter(author=u):
 			print('-',r)
 
 def add_user(username, password):
-	u = User.objects.get_or_create(username=username, password=password)[0]
-	u.username=username
-	u.password=password
+	u = User.objects.create_user(username=username, password=password)
 	u.save()
 	return u
 
-def add_post(user, title, description, averageRating, category, date):
-	p = Post.objects.get_or_create(user=user, title=title, description=description, averageRating=averageRating, category=category, date=date)[0]
-	p.user = user
+def add_post(author, title, description, averageRating, category, date):
+	p = Post.objects.get_or_create(author=author, title=title, description=description, averageRating=averageRating, category=category)[0]
+	p.author = author
 	p.title = title
 	p.description = description
 	p.averageRating = averageRating
 	p.category = category
-	p.date = date
 	p.save()
 	return p
 
-def add_review(user, post, score, comment, date):
-	r = Review.objects.get_or_create(user=user, post=post, score=score, comment=comment, date=date)[0]
-	r.user = user
+def add_review(author, post, score, comment, date):
+	r = Review.objects.get_or_create(author=author, post=post, score=score, comment=comment)[0]
+	r.author = author
 	r.post = post
 	r.score = score
 	r.comment = comment
-	r.date = date
 	r.save()
 	return r
 
