@@ -92,7 +92,6 @@ def add_post(request):
             descriptionInput = post_form.cleaned_data.get("descirption")
             imageInput = post_form.cleaned_data.get("image")
             obj = Post.objects.create(
-                author = User.username,
                 title = titleInput,
                 description = descriptionInput,
                 image = imageInput,
