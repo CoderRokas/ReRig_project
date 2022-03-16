@@ -6,7 +6,7 @@ from rerig.models import Post,Review
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    image = forms.ImageField()
+    image = forms.ImageField(initial= "media/profile_images/default.png")
 
     class Meta:
         model = User
