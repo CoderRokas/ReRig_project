@@ -1,36 +1,55 @@
 from django import forms
 from django.contrib.auth.models import User
 import datetime
-from rerig.models import Post,Review
+from rerig.models import Post,Review,Profile
 
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    image = forms.ImageField(initial= "media/profile_images/default.png")
 
     class Meta:
         model = User
-        fields = ('username', 'password','image')
+        fields = ('username', 'password',)
+    
+class ProfileForm(forms.ModelForm):
+    picture = forms.ImageField(initial= "media/profile_images/default.png")
+
+    class Meta:
+        model = Profile
+        fields = ('picture',)
+
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    
+    class Meta:
+        model = User
+        fields = ('username', 'password',)
+
+class UpdateProfileForm(forms.ModelForm):
+    picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+
+    class Meta:
+        model = Profile
+        fields = ('picture',)
 
 class PostForm(forms.ModelForm):
 
-    categoryChoices = ('PC', 'Laptop')
+    categoryChoices = ('PC', 'Laptop',)
 
     title = forms.CharField(max_length=50)
     description = forms.CharField(max_length=200, help_text="Please enter a description of your build.")
     averageRating = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     category = forms.MultipleChoiceField(choices=categoryChoices)
-    image = forms.ImageField()
-    date = forms.DateField(widget=forms.HiddenInput(), initial=datetime)
+    picture = forms.ImageField()
 
     class Meta:
         model = Post
-        fields = ('title', 'averageRating', 'category', 'image')
+        fields = ('title', 'averageRating', 'category', 'picture',)
 
 class ReviewForm(forms.ModelForm):
     comment = forms.CharField(max_length=200)
     score = forms.IntegerField(max_value=5)
-    date = forms.DateField(widget=forms.HiddenInput(), initial=datetime)
 
     class Meta:
         model = Review
