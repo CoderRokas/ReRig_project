@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 import datetime
 from rerig.models import Post,Review
 
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    image = forms.ImageField(upload_to = "media/profile_images/")
+    image = forms.ImageField()
 
     class Meta:
         model = User
-        fields = ('username', 'password','profileImage')
+        fields = ('username', 'password','image')
 
 class PostForm(forms.ModelForm):
 
@@ -19,7 +20,7 @@ class PostForm(forms.ModelForm):
     description = forms.CharField(max_length=200, help_text="Please enter a description of your build.")
     averageRating = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     category = forms.MultipleChoiceField(choices=categoryChoices)
-    image = forms.ImageField(upload_to = "media/post_images/")
+    image = forms.ImageField()
     date = forms.DateField(widget=forms.HiddenInput(), initial=datetime)
 
     class Meta:
