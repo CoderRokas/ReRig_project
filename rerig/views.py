@@ -86,10 +86,18 @@ def show_post(request):
 @login_required
 def add_post(request):
     if request.method == 'POST':
-        post_form = PostForm(request.POST)
+        post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
-            post = post_form.save()
-            post.user = User.username
+            titleInput = post_form.cleaned_data.get("title")
+            descriptionInput = post_form.cleaned_data.get("descirption")
+            imageInput = post_form.cleaned_data.get("image")
+            obj = Post.objects.create(
+                author = User.username,
+                title = titleInput,
+                description = descriptionInput,
+                image = imageInput,
+                )
+            obj.save()
             return render(request , 'rerig/post.html')
         else:
             print(post_form.errors)

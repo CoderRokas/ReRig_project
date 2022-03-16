@@ -5,10 +5,11 @@ from rerig.models import Post,Review
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    image = forms.ImageField(upload_to = "media/profile_images/")
 
     class Meta:
         model = User
-        fields = ('username', 'password',)
+        fields = ('username', 'password','profileImage')
 
 class PostForm(forms.ModelForm):
 
@@ -18,11 +19,12 @@ class PostForm(forms.ModelForm):
     description = forms.CharField(max_length=200, help_text="Please enter a description of your build.")
     averageRating = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     category = forms.MultipleChoiceField(choices=categoryChoices)
+    image = forms.ImageField(upload_to = "media/post_images/")
     date = forms.DateField(widget=forms.HiddenInput(), initial=datetime)
 
     class Meta:
         model = Post
-        fields = ('title', 'averageRating', 'category',)
+        fields = ('title', 'averageRating', 'category', 'image')
 
 class ReviewForm(forms.ModelForm):
     comment = forms.CharField(max_length=200)
