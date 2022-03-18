@@ -10,13 +10,6 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password',)
-    
-class ProfileForm(forms.ModelForm):
-    picture = forms.ImageField(initial= "media/profile_images/default.png")
-
-    class Meta:
-        model = Profile
-        fields = ('picture',)
 
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

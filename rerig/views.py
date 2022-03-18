@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
-from rerig.forms import UserForm,ProfileForm,PostForm,UpdateUserForm,UpdateProfileForm
+from rerig.forms import UserForm,PostForm,UpdateUserForm,UpdateProfileForm
 from rerig.models import Post,Review
 
 def index(request):
@@ -48,17 +48,12 @@ def register(request):
 
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.Post)
 
-        if user_form.is_valid() & profile_form.is_valid():
+        if user_form.is_valid():
 
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-
-            profile = profile_form.save()
-            profile.user = user
-            profile.save()
 
             registered = True
         else:
