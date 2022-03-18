@@ -107,12 +107,13 @@ def add_post(request):
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
             titleInput = post_form.cleaned_data.get("title")
-            descriptionInput = post_form.cleaned_data.get("descirption")
+            descriptionInput = post_form.cleaned_data.get("description")
             imageInput = post_form.cleaned_data.get("image")
             obj = Post.objects.create(
                 title = titleInput,
                 description = descriptionInput,
-                image = imageInput,
+                picture = imageInput,
+                author=request.user
                 )
             obj.save()
             return render(request , 'rerig/post.html')
@@ -120,8 +121,7 @@ def add_post(request):
             print(post_form.errors)
     else:
         post_form = PostForm()
-    
     context_dict = {'post_form': post_form}
-    return render (request, 'rerig/add_post.html', context=context_dict)
+    return render(request, 'rerig/add_post.html', context=context_dict)
 
 # Create your views here.

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 import datetime
+from django.forms import widgets
 from rerig.models import Post,Review,Profile
 
 
@@ -28,11 +29,11 @@ class UpdateProfileForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
 
-    categoryChoices = ('PC', 'Laptop',)
+    categoryChoices = (('PC', 'PC'), ('Laptop', 'Laptop'),)
 
     title = forms.CharField(max_length=50)
     description = forms.CharField(max_length=200, help_text="Please enter a description of your build.")
-    averageRating = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    averageRating = forms.IntegerField(widget=widgets.HiddenInput, initial=0)
     category = forms.MultipleChoiceField(choices=categoryChoices)
     picture = forms.ImageField()
 
