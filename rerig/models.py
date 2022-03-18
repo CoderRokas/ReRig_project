@@ -8,6 +8,11 @@ from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(default='profile_images/default.png', upload_to='profile_images')
+    slug = models.SlugField(default='')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super(Profile, self).save(*args, **kwargs)
     
     def __str__(self):
         return str(self.user.username)
