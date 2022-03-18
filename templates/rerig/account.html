@@ -14,12 +14,12 @@
     {% block navbar_block %}
         <ul id="navbar">
             <img src="{% static 'images/Rerig.jpg' %}" alt="Rerig logo"/>
-            <li><button id="homeButton" onclick="goHome()">Home</button></li>
-            <li><button id="aboutButton" onclick="goToAbout()">About</button></a></li>
-            <li><button id="searchButton" onclick="goToSearch()">Search</button></a></li>
+            <li><button class="button1" id="homeButton" onclick="goHome()">Home</button></li>
+            <li><button class="button1" id="aboutButton" onclick="goToAbout()">About</button></a></li>
+            <li><button class="button1" id="searchButton" onclick="goToSearch()">Search</button></a></li>
             <li><img src="{{ MEDIA_URL }}{{ user.picture }}" alt ="userPicture" /></li>
-            <li><button id="addAPostButton" onclick="goToAddPost()">Add a new Post</button></li>
-            <li><button id="logoutButton" onclick="logout()">Logout</button></li>
+            <li><button class="button1" id="addAPostButton" onclick="goToAddPost()">Add a new Post</button></li>
+            <li><button class="button1" id="logoutButton" onclick="logout()">Logout</button></li>
         </ul>
     {% endblock %}
 
