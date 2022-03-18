@@ -18,7 +18,7 @@
             {% if posts %}
                 {% for post in posts %}
                     <div id="carousel-item"> 
-                        <p>{{ post.title }}</p>
+                        <img src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" />
                     </div>
                 {% endfor %}
             {% else %}
