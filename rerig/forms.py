@@ -29,17 +29,16 @@ class UpdateProfileForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
 
-    categoryChoices = (('PC', 'PC'), ('Laptop', 'Laptop'),)
+    categoryChoices = (('1', 'PC'), ('2', 'Laptop'),)
 
     title = forms.CharField(max_length=50)
-    description = forms.CharField(max_length=200, help_text="Please enter a description of your build.")
     averageRating = forms.IntegerField(widget=widgets.HiddenInput, initial=0)
-    category = forms.MultipleChoiceField(choices=categoryChoices)
-    picture = forms.ImageField()
+    category = forms.ChoiceField(choices=categoryChoices)
+    description = forms.CharField(max_length = 200, widget=forms.Textarea(attrs={'rows':7}))
 
     class Meta:
         model = Post
-        fields = ('title', 'averageRating', 'category', 'picture',)
+        fields = ('title','category', 'picture','description',)
 
 class ReviewForm(forms.ModelForm):
     comment = forms.CharField(max_length=200)

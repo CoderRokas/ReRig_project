@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 from rerig.forms import UserForm,PostForm,UpdateUserForm,UpdateProfileForm
-from rerig.models import Post,Review
+from rerig.models import Post,Review,Profile
 
 def index(request):
     context_dict = {}
@@ -77,8 +77,14 @@ def account(request, username_slug):
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
+    
 
-    return render(request, 'rerig/account.html', {'user_form': user_form, 'profile_form': profile_form})
+    context_dict = {'user_form': user_form, 'profile_form': profile_form}
+    u = User.objects.get(username=username_slug)
+    context_dict['userProfile'] = u.profile
+
+
+    return render(request, 'rerig/account.html', context=context_dict)
 
 def search(request):
     context_dict={}
