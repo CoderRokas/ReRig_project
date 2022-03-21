@@ -4,15 +4,29 @@
 
 <html>
     {% block title_block %}
-        Post-Name
+
     {% endblock %}
 
     {% block header_block %}
-        <h1>Post-Name!</h1>
+        <h1>{{ post.title }}</h1>
     {% endblock %}
-    
+
     {% block body_block %}
-        <p>This is the Post page.</p>
+        <body>
+        <div style="width:800px; margin:0 auto;">
+        {{ post.category }} <br/><br/><br/>
+            Picture:<br/>
+            {{ post.picture }} <br/><br/><br/>
+            Description:<br/>
+            {{ post.description }}<br/><br/><br/>
+            Post date: {{ post.date}}<br/><br/><br/>
+
+            {{ post.averageRating }}<br/>
+        </div>
+        <div style="width:800px; margin:0 auto;">
+            <textarea id="comment" name="comment"  rows="5" cols=35 placeholder="Please leave your comment:"></textarea>
+        </div>>
+        </body>
 
 
     {% endblock %}

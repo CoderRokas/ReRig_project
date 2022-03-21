@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
-from rerig.forms import UserForm,PostForm,UpdateUserForm,UpdateProfileForm
+from rerig.forms import UserForm, PostForm, UpdateUserForm, UpdateProfileForm, ReviewForm
 from rerig.models import Post,Review,Profile
 
 def index(request):
@@ -105,6 +105,17 @@ def show_post(request, post_id):
         post = Post.objects.get(pk=post_id)
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, request.FILES)
+        if review_form.is_valid():
+            commentInput = review_form.cleaned_data.get("comment")
+            scoreInput = review_form.cleaned_data.get("score")
+            com = Review.objects.create(
+                comment=commentInput,
+                score=scoreInput,
+            )
+            com.save()
+            return redirect(reverse('rerig:show_post'))
     return render(request, 'rerig/post.html', {'post':post})
 
 @login_required
@@ -122,7 +133,7 @@ def add_post(request):
                 author=request.user
                 )
             obj.save()
-            return render(request , 'rerig/post.html')
+            return redirect(reverse('rerig:show_post', args=[obj.id]))
         else:
             print(post_form.errors)
     else:

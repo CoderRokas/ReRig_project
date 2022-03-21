@@ -34,11 +34,11 @@ class PostForm(forms.ModelForm):
     title = forms.CharField(max_length=50)
     averageRating = forms.IntegerField(widget=widgets.HiddenInput, initial=0)
     category = forms.ChoiceField(choices=categoryChoices)
-    description = forms.CharField(max_length = 200, widget=forms.Textarea(attrs={'rows':7}))
+    description = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'rows': 7, 'placeholder': 'Please type your description here:'}))
 
     class Meta:
         model = Post
-        fields = ('title','category', 'picture','description',)
+        fields = ('title', 'category', 'picture', 'description',)
 
 class ReviewForm(forms.ModelForm):
     comment = forms.CharField(max_length=200)
