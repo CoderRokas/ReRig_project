@@ -115,8 +115,13 @@ def show_post(request, post_id):
                 score=scoreInput,
             )
             com.save()
-            return redirect(reverse('rerig:show_post'))
-    return render(request, 'rerig/post.html', {'post':post})
+            return render(request, 'rerig/post.html', {'post': post})
+        else:
+            print(review_form.errors)
+    else:
+        review_form = ReviewForm()
+        context_dict = {'review_form': review_form}
+        return render(request, 'rerig/post.html', {'post': post})
 
 @login_required
 def add_post(request):
@@ -125,12 +130,14 @@ def add_post(request):
         if post_form.is_valid():
             titleInput = post_form.cleaned_data.get("title")
             descriptionInput = post_form.cleaned_data.get("description")
-            imageInput = post_form.cleaned_data.get("image")
+            imageInput = post_form.cleaned_data.get("picture")
+            category = post_form.cleaned_data.get("category")
             obj = Post.objects.create(
                 title = titleInput,
                 description = descriptionInput,
-                picture = imageInput,
-                author=request.user
+                picture = imageInput or None,
+                author=request.user,
+                category=category
                 )
             obj.save()
             return redirect(reverse('rerig:show_post', args=[obj.id]))

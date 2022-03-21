@@ -29,7 +29,7 @@ class UpdateProfileForm(forms.ModelForm):
 
 class PostForm(forms.ModelForm):
 
-    categoryChoices = (('1', 'PC'), ('2', 'Laptop'),)
+    categoryChoices = (('PC', 'PC'), ('Laptop', 'Laptop'),)
 
     title = forms.CharField(max_length=50)
     averageRating = forms.IntegerField(widget=widgets.HiddenInput, initial=0)
@@ -38,7 +38,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'category', 'picture', 'description',)
+        fields = ('title', 'category', 'averageRating', 'picture', 'description')
 
 class ReviewForm(forms.ModelForm):
     comment = forms.CharField(max_length=200)
