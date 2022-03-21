@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -36,8 +37,13 @@ class Post(models.Model):
     date = models.DateField(default=timezone.now)
     picture = models.ImageField(default='post_images/default.png', upload_to='post_images')
 
+    @property
+    #def averageRating(self):
+    #    return self.review_set.all().aggregate(Avg('score'))
+
     def __str__(self):
         return self.title
+
 
 class Review(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)

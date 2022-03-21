@@ -14,17 +14,22 @@
     {% block body_block %}
         <body>
         <div style="width:800px; margin:0 auto;">
-        {{ post.category }} <br/><br/><br/>
+            Average Rating:<br/>
+            {{ post.averageRating }}<br/>
             Picture:<br/>
-            {{ post.picture }} <br/><br/><br/>
+
+            <img src="{{ post.picture.url }}" alt=""> <br/><br/><br/>
+             {{ post.category }} <br/><br/><br/>
             Description:<br/>
             {{ post.description }}<br/><br/><br/>
             Post date: {{ post.date}}<br/><br/><br/>
 
-            {{ post.averageRating }}<br/>
+
         </div>
         <div style="width:800px; margin:0 auto;">
-            <textarea id="comment" name="comment"  rows="5" cols=35 placeholder="Please leave your comment:"></textarea>
+            <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+	{{ review_form.as_p }}
+	<input type="submit" value="Comment">
         </div>>
         </body>
 
