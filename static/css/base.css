@@ -1,8 +1,25 @@
 h1 {
-    font-size: xx-large;
-    text-align: center;
     color: blueviolet;
+    padding-left:30px;
+    position:relative;
 }
+
+h1,#logo{
+    position:relative;
+    vertical-align: middle;
+    display:inline-block;
+    text-align:center;
+    left:650px;
+}
+
+#aboutUsHeading{
+    left:680px;
+}
+
+.oneWordHeadings{
+    left:726px;
+}
+
 
 h2 {
     text-align: center;
@@ -15,14 +32,44 @@ ul > li {
 
 .button1 {
     background-color: transparent;
+    font-size: 20px;
+    padding-right:194px;
+    padding-left:186px;
     border: 0ch;
+}
+#homeButton{
+    padding-left:0;
+}
+
+#registerButton {
+    padding-right:0;
+}
+
+#logoutButton {
+    padding-right:0;
 }
 
 .button1:hover {
     color: blueviolet;
 }
 
+#ProfilePicture{
+    width:32px;
+    height:32px;
+    vertical-align:middle;
+}
+
+#addAPostButton{
+    padding-right:0px;
+}
+
 body {
     background-color: beige;
 }
 
+.aboutSection{
+    font-size:18px;
+    padding-left:250px;
+    padding-right:250px;
+    padding-top:120px;
+}
