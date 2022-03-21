@@ -41,9 +41,6 @@ class Post(models.Model):
     date = models.DateField(default=timezone.now)
     picture = models.ImageField(default='post_images/default.png', upload_to='post_images')
 
-    @property
-    # def averageRating(self):
-    #    return self.review_set.all().aggregate(Avg('score'))
 
     def __str__(self):
         return self.title

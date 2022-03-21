@@ -132,6 +132,7 @@ def add_post(request):
             descriptionInput = post_form.cleaned_data.get("description")
             imageInput = post_form.cleaned_data.get("picture")
             category = post_form.cleaned_data.get("category")
+
             obj = Post.objects.create(
                 title = titleInput,
                 description = descriptionInput,
