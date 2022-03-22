@@ -12,27 +12,31 @@
             {% endblock %}
         </title>
 
-        <div>
+        <div id="heading">
             <img id="logo" src="{% static 'images/Rerig.jpg' %}" alt="Rerig logo"/>
             {% block header_block %}
                 <h1>Welcome to Rerig!</h1>
             {% endblock %}
         </div>
 
-        <div>
+        <div id="blockingDiv">
             {% block navbar_block %}
                 <ul id="navbar">
                     
-                    <li><button class="button1" id="homeButton" onclick="goHome()">Home</button></li>
-                    <li><button class="button1" id="aboutButton" onclick="goToAbout()">About</button></a></li>
-                    <li><button class="button1" id="searchButton" onclick="goToSearch()">Search</button></a></li>
+                    <li><button class="navButtons" id="homeButton" onclick="goHome()">Home</button></li>
+                    <li><button class="navButtons" id="aboutButton" onclick="goToAbout()">About</button></a></li>
+                    <li><button class="navButtons" id="searchButton" onclick="goToSearch()">Search</button></a></li>
                     
                     {% if user.is_authenticated %}
-                        <li><button class="button1" id="accountButton" value="{{ user.username }}" onclick="goToAccount(this.value)">{{ user.username }}</button></li>
-                        <li><button class="button1" id="logoutButton" onclick="logout()">Logout</button></li>
+                        <li><button class="navButtons" id="accountButton" value="{{ user.username }}" onclick="goToAccount(this.value)">{{ user.username }}</button></li>
+                        <li><button class="navButtons" id="logoutButton" onclick="logout()">Logout</button></li>
                     {% else %}
-                        <li><button class="button1" id="loginButton" onclick="goToLogin()">Login</button></li>
-                        <li><button class="button1" id="registerButton" onclick="register()">Register</button></li>
+                    {% if request.path != "/rerig/login/" %}
+                    <li><button class="navButtons" id="loginButton" onclick="goToLogin()">Login</button></li>
+                    {% endif %}
+                    {% if request.path != "/rerig/register/" %}
+                        <li><button class="navButtons" id="registerButton" onclick="register()">Register</button></li>
+                    {% endif %}
                     {% endif %}
                     
                 </ul>

@@ -1,25 +1,22 @@
 h1 {
     color: blueviolet;
-    padding-left:30px;
-    position:relative;
+    text-align:center;
 }
 
 h1,#logo{
-    position:relative;
     vertical-align: middle;
     display:inline-block;
     text-align:center;
-    left:650px;
 }
 
-#aboutUsHeading{
-    left:680px;
+#heading{
+    position:relative;
+    text-align:center;
 }
 
-.oneWordHeadings{
-    left:726px;
+#logo{
+    right:20px;
 }
-
 
 h2 {
     text-align: center;
@@ -27,29 +24,28 @@ h2 {
 
 ul > li {
     display: inline-block;
-    
+    list-style: none;
 }
 
-.button1 {
+.navButtons {
     background-color: transparent;
     font-size: 20px;
-    padding-right:194px;
-    padding-left:186px;
     border: 0ch;
-}
-#homeButton{
-    padding-left:0;
-}
-
-#registerButton {
-    padding-right:0;
+    padding-left:2vw;
+    padding-right:2vw;
 }
 
-#logoutButton {
-    padding-right:0;
+#searchButton{
+    padding-left:4vw;
+    padding-right:4vw;
 }
 
-.button1:hover {
+#navbar{
+    text-align:center;
+}
+
+
+.navButtons:hover {
     color: blueviolet;
 }
 
