@@ -1,21 +1,7 @@
 h1 {
+    font-size: xx-large;
+    text-align: center;
     color: blueviolet;
-    text-align:center;
-}
-
-h1,#logo{
-    vertical-align: middle;
-    display:inline-block;
-    text-align:center;
-}
-
-#heading{
-    position:relative;
-    text-align:center;
-}
-
-#logo{
-    right:20px;
 }
 
 h2 {
@@ -24,48 +10,19 @@ h2 {
 
 ul > li {
     display: inline-block;
-    list-style: none;
+    
 }
 
-.navButtons {
+.button1 {
     background-color: transparent;
-    font-size: 20px;
     border: 0ch;
-    padding-left:2vw;
-    padding-right:2vw;
 }
 
-#searchButton{
-    padding-left:4vw;
-    padding-right:4vw;
-}
-
-#navbar{
-    text-align:center;
-}
-
-
-.navButtons:hover {
+.button1:hover {
     color: blueviolet;
-}
-
-#ProfilePicture{
-    width:32px;
-    height:32px;
-    vertical-align:middle;
-}
-
-#addAPostButton{
-    padding-right:0px;
 }
 
 body {
     background-color: beige;
 }
 
-.aboutSection{
-    font-size:18px;
-    padding-left:250px;
-    padding-right:250px;
-    padding-top:120px;
-}

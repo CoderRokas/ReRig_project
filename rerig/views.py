@@ -1,14 +1,16 @@
 from unicodedata import category
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.http import Http404 
+from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 from rerig.forms import UserForm, PostForm, UpdateUserForm, UpdateProfileForm, ReviewForm
-from rerig.models import Post,Review,Profile
+from rerig.models import Post, Review, Profile
+
 
 def index(request):
     context_dict = {}
@@ -16,13 +18,14 @@ def index(request):
     post_list = Post.objects.order_by('-averageRating')[:5]
 
     context_dict['posts'] = post_list
-    
+
     return render(request, 'rerig/index.html', context=context_dict)
 
 
 def about(request):
     context_dict = {}
     return render(request, 'rerig/about.html', context=context_dict)
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -43,6 +46,7 @@ def user_login(request):
     else:
         return render(request, 'rerig/login.html')
 
+
 def register(request):
     registered = False
 
@@ -62,8 +66,9 @@ def register(request):
             print(user_form.errors)
     else:
         user_form = UserForm()
-    
-    return render(request, 'rerig/register.html', context={'user_form':user_form, 'registered':registered})
+
+    return render(request, 'rerig/register.html', context={'user_form': user_form, 'registered': registered})
+
 
 @login_required
 def account(request, username_slug):
@@ -72,22 +77,23 @@ def account(request, username_slug):
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
         if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
             profile_form.save()
     else:
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
-    
 
     context_dict = {'user_form': user_form, 'profile_form': profile_form}
     u = User.objects.get(username=username_slug)
     context_dict['userProfile'] = u.profile
 
-
     return render(request, 'rerig/account.html', context=context_dict)
 
+
 def search(request):
-    context_dict={}
+    context_dict = {}
 
     post_list = Post.objects.order_by('-date')
 
@@ -95,10 +101,12 @@ def search(request):
 
     return render(request, 'rerig/search.html', context=context_dict)
 
+
 @login_required
 def user_logout(request):
     logout(request)
     return redirect(reverse('rerig:index'))
+
 
 def show_post(request, post_id):
     try:
@@ -113,15 +121,23 @@ def show_post(request, post_id):
             com = Review.objects.create(
                 comment=commentInput,
                 score=scoreInput,
+                post=post,
+                author=request.user
             )
             com.save()
-            return render(request, 'rerig/post.html', {'post': post})
+
+            # re-calculate the average point
+            reviews = post.review_set.all()
+            if reviews:
+                sum_score = reviews.aggregate(score=Sum('score'))
+                post.averageRating = int(sum_score['score'] / len(reviews))
+                post.save()
         else:
             print(review_form.errors)
-    else:
-        review_form = ReviewForm()
-        context_dict = {'review_form': review_form}
-        return render(request, 'rerig/post.html', {'post': post})
+    review_form = ReviewForm()
+    context_dict = {'review_form': review_form, 'post': post}
+    return render(request, 'rerig/post.html', context=context_dict)
+
 
 @login_required
 def add_post(request):
@@ -134,12 +150,12 @@ def add_post(request):
             category = post_form.cleaned_data.get("category")
 
             obj = Post.objects.create(
-                title = titleInput,
-                description = descriptionInput,
-                picture = imageInput or None,
+                title=titleInput,
+                description=descriptionInput,
+                picture=imageInput or None,
                 author=request.user,
                 category=category
-                )
+            )
             obj.save()
             return redirect(reverse('rerig:show_post', args=[obj.id]))
         else:

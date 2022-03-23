@@ -2,30 +2,34 @@
 {% extends 'rerig/base.html' %}
 {% load staticfiles %}
 
-<html>
-    {% block title_block %}
-        {{ user.username }}
-    {% endblock %}
-    
-    {% block header_block %}
-        <h1 class="oneWordHeadings">{{ user.username }}</h1>
-    {% endblock %}
+<!-- Since this extends the base.html file we don't want to touch the title or navbar here as the base version will suffice for the index page -->
+{% block header_block %}
+    <h1>Welcome to Rerig!</h1>
+{% endblock %}
 
-    {% block navbar_block %}
-        <ul id="navbar">
-            <li><button class="navButtons" id="homeButton" onclick="goHome()">Home</button></li>
-            <li><button class="navButtons" id="aboutButton" onclick="goToAbout()">About</button></a></li>
-            <li><button class="navButtons" id="searchButton" onclick="goToSearch()">Search</button></a></li>
-            <li><img id="ProfilePicture" src="{{ MEDIA_URL }}{{ userProfile.picture }}" alt ="userPicture" /></li>
-            <li><button class="navButtons" id="addAPostButton" onclick="goToAddPost()">Add a new Post</button></li>
-            <li><button class="navButtons" id="logoutButton" onclick="logout()">Logout</button></li>
-        </ul>
-    {% endblock %}
+{% block body_block %}
+    <div style="text-align: center">
+        <div>
+            <img src="{{ MEDIA_URL }}{{ userProfile.picture }}" alt="avatar"
+                 style="height: 100px;width: 100px;border-radius:50%;"/>
+        </div>
+        <h2>
+            {% block title_block %}
+                {{ user.username }}
+            {% endblock %}
+        </h2>
 
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ profile_form.as_p }}
+                <button class="button1" type="submit"><h3>Submit</h3></button>
+            </form>
+        </div>
+        <div>
+            <button class="button1" id="addAPostButton" onclick="goToAddPost()"><h3>Add a new Post</h3></button>
+        </div>
 
-    {% block body_block %}
-        <p>This is the Account page.</p>
+    </div>
 
-
-    {% endblock %}
-</html>
+{% endblock %}

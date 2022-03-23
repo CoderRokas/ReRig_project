@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-views.py
-=======
-manage.py
->>>>>>> 0c45d4300b93f4a0e0eab181f45596660d931b11
+models.py

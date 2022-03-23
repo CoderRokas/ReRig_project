@@ -2,37 +2,115 @@
 {% extends 'rerig/base.html' %}
 {% load staticfiles %}
 
-<html>
-    {% block title_block %}
+{% block title_block %}
 
-    {% endblock %}
+{% endblock %}
 
-    {% block header_block %}
-        <h1>{{ post.title }}</h1>
-    {% endblock %}
+{% block header_block %}
+    <h1>{{ post.title }}</h1>
+{% endblock %}
 
-    {% block body_block %}
-        <body>
-        <div style="width:800px; margin:0 auto;">
-            Average Rating:<br/>
-            {{ post.averageRating }}<br/>
-            Picture:<br/>
-
-            <img src="{{ post.picture.url }}" alt=""> <br/><br/><br/>
-             {{ post.category }} <br/><br/><br/>
-            Description:<br/>
-            {{ post.description }}<br/><br/><br/>
-            Post date: {{ post.date}}<br/><br/><br/>
-
+{% block body_block %}
+    <div style="text-align: center">
+        <div style="display: inline-flex">
+            <img src="{{ MEDIA_URL }}{{ post.author.profile.picture }}" alt="avatar"
+                 style="height: 50px;width: 50px;border-radius:50%;"/>
+            <p style="text-align: left;margin: 5px 15px;">
+                {{ post.author.username }} <br>{{ post.date }}
+            </p>
+        </div>
+        <hr>
+        <div>
+            <img src="{{ post.picture.url }}" alt="" style="width: 200px;height: 200px;"> <br/><br/>
+            Average Rating: {{ post.averageRating }}<br/><br/>
+            Category: {{ post.category }} <br/><br/>
+            Description: {{ post.description }}<br/><br/>
 
         </div>
-        <div style="width:800px; margin:0 auto;">
-            <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
-	{{ review_form.as_p }}
-	<input type="submit" value="Comment">
-        </div>>
-        </body>
+        <hr>
+        <div>
+            {% for review in post.review_set.all %}
+                <div style="margin: 50px">
+                    <div style="display: inline-flex">
+                        <img src="{{ MEDIA_URL }}{{ review.author.profile.picture }}" alt="avatar"
+                             style="height: 50px;width: 50px;border-radius:50%;"/>
+                        <p style="text-align: left;margin: 5px 15px;">
+                            {{ review.author.username }} <br>{{ review.date }}
+                        </p>
+
+                    </div>
+                    <p>
+                        {{ review.score }} points
+                    </p>
+                    <p>
+                        {{ review.comment }}
+                    </p>
+                </div>
+
+            {% endfor %}
+        </div>
+        <hr>
+        <div style="margin: 50px">
+            <style type="text/css">
+                .cleanfloat::after {
+                    display: block;
+                    clear: both;
+                    content: "";
+                    visibility: hidden;
+                    height: 0;
+                }
+
+                .cleanfloat ul li {
+                    list-style: none;
+                    float: left;
+                    font-size: 30px;
+                    margin: 5px;
+                    color: #ccc;
+                    cursor: pointer;
+                }
+
+                .hs, .cs {
+                    color: #f00;
+                }
+            </style>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ review_form.as_p }}
+                <div style="display: inline-table">
+                    Leave your rating:
+                    <ul class="cleanfloat" style="font-size: 30px; margin: 0px;">
+                        <li value="1">★</li>
+                        <li value="2">★</li>
+                        <li value="3">★</li>
+                        <li value="4">★</li>
+                        <li value="5">★</li>
+                    </ul>
+                </div>
+                <br>
+                <br>
+                <input type="submit" value="Comment">
+            </form>
+        </div>
+    </div>
 
 
-    {% endblock %}
-</html>
+    <script src="{% static 'js/jquery.min.js' %}" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $("ul li").hover(function () {
+                $(this).addClass('hs');
+                $(this).prevAll().addClass('hs');
+            }, function () {
+                $(this).removeClass('hs');
+                $(this).prevAll().removeClass('hs');
+            })
+
+            $("ul li").click(function () {
+                $(this).addClass('cs');
+                $(this).prevAll().addClass('cs');
+                $(this).nextAll().removeClass('cs');
+                $("#id_score").val($(this).val())
+            })
+        })
+    </script>
+{% endblock %}
