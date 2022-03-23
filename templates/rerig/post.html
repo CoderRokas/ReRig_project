@@ -88,7 +88,11 @@
                 </div>
                 <br>
                 <br>
-                <input type="submit" value="Comment">
+                 {% if request.user.is_authenticated %}
+                    <input type="submit" value="Comment">
+                {% else %}
+                    <a href="{% url 'rerig:login' %}">Please login to comment!</a>
+                {% endif %}
             </form>
         </div>
     </div>
