@@ -11,16 +11,6 @@
         <h1>Login!</h1>
     {% endblock %}
 
-    {% block navbar_block %}
-        <ul id="navbar">
-            <img src="{% static 'images/Rerig.jpg' %}" alt="Rerig logo"/>
-            <li><button class="button1" id="homeButton" onclick="goHome()">Home</button></li>
-            <li><button class="button1" id="aboutButton" onclick="goToAbout()">About</button></a></li>
-            <li><button class="button1" id="searchButton" onclick="goToSearch()">Search</button></a></li>
-            <li><button class="button1" id="registerButton" onclick="register()">Register</button></li>
-        </ul>
-    {% endblock %}
-
     {% block body_block %}
         <form id="login_form" method="post" action="{% url 'rerig:login' %}">
             {% csrf_token %}
