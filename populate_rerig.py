@@ -17,17 +17,17 @@ def populate():
 	users_objects = {}
 
 	posts = [
-		{'username' : 'Bob', 'title' : 'post1', 'description' : 'A very interesting description', 'averageRating' : 4, 'category' : 'desktop', 'date':datetime.datetime(2020,10,10)},
-		{'username' : 'Alex', 'title' : 'post2', 'description' : 'A very interesting description', 'averageRating' : 2, 'category' : 'desktop', 'date':datetime.datetime(2019,11,21)},
-		{'username' : 'Alex', 'title' : 'post3', 'description' : 'A very interesting description', 'averageRating' : 2, 'category' : 'laptop', 'date':datetime.datetime(2020,9,10)}
+		{'username' : 'Bob', 'title' : 'New PC', 'description' : 'Rate my Rig', 'averageRating' : 4, 'category' : 'PC', 'date':datetime.datetime(2020,10,10), 'picture':'post_test_images/test1.jpg'},
+		{'username' : 'Alex', 'title' : 'Should I Buy?', 'description' : 'I need a laptop for school, was looking for a good one is this any good?', 'averageRating' : 2, 'category' : 'laptop', 'date':datetime.datetime(2019,11,21), 'picture':'post_test_images/test2.jpg'},
+		{'username' : 'Tom', 'title' : 'Old Setup', 'description' : 'What should I upgrade, got a pentium and gtx 480 in there', 'averageRating' : 2, 'category' : 'PC', 'date':datetime.datetime(2020,9,10),'picture':'post_test_images/test3.jpg'}
 	]
 
 	posts_objects = {}
 
 	reviews = [
-		{'username' : 'Bob', 'post_title' : 'post1', 'score' : 4, 'comment' : 'This is good', 'date':datetime.datetime(2020,10,10)},
-		{'username' : 'Bob', 'post_title' : 'post2', 'score' : 2, 'comment' : 'This is average', 'date':datetime.datetime(2020,3,10)},
-		{'username' : 'Tom', 'post_title' : 'post2', 'score' : 2, 'comment' : 'This is average', 'date':datetime.datetime(2020,5,10)}
+		{'username' : 'Alex', 'post_title' : 'New PC', 'score' : 4, 'comment' : 'Too much RGB lights', 'date':datetime.datetime(2020,10,11)},
+		{'username' : 'Tom', 'post_title' : 'Should I Buy?', 'score' : 2, 'comment' : 'Solid laptop would recommend!', 'date':datetime.datetime(2020,3,10)},
+		{'username' : 'Tom', 'post_title' : 'Old Setup', 'score' : 2, 'comment' : 'Everything.', 'date':datetime.datetime(2020,9,11)}
 	]
 
 	for new_user in new_users:
@@ -35,7 +35,7 @@ def populate():
 		users_objects[new_user['username']] = u
 	
 	for post in posts:
-		p = add_post(users_objects[post['username']], post['title'], post['description'], post['averageRating'], post['category'], post['date'])
+		p = add_post(users_objects[post['username']], post['title'], post['description'], post['averageRating'], post['category'], post['date'], post['picture'])
 		posts_objects[post['title']] = p
 
 	for review in reviews:
@@ -58,13 +58,14 @@ def add_user(username, password):
 	u.save()
 	return u
 
-def add_post(author, title, description, averageRating, category, date):
-	p = Post.objects.get_or_create(author=author, title=title, description=description, averageRating=averageRating, category=category)[0]
+def add_post(author, title, description, averageRating, category, date, picture):
+	p = Post.objects.get_or_create(author=author, title=title, description=description, averageRating=averageRating, category=category,picture=picture)[0]
 	p.author = author
 	p.title = title
 	p.description = description
 	p.averageRating = averageRating
 	p.category = category
+	p.picture = picture
 	p.save()
 	return p
 
