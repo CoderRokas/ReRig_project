@@ -12,19 +12,22 @@
     {% endblock %}
 
     {% block body_block %}
+        <br/><br/><br/>
+        <div style="width:800px; margin:0 auto; text-align: center">
         <form method="post" action="{% url 'rerig:login' %}">
             {% csrf_token %}
             Username: <input type="text" name="username" value="" size="50" />
             <br />
             <br />
             Password: <input type="password" name="password" value="" size="50" />
-            <br />
+            <br /><br/><br/>
             <input id="submit-button" type="submit" value="submit" />
             <br />
             <p>Or click here to sign up:</p>
             <br />
             <a id="register-link" href="{% url 'rerig:register' %}">Register</a>
         </form>
+        </div>
 
     {% endblock %}
 </html>
