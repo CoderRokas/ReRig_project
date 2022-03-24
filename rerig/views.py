@@ -93,9 +93,16 @@ def account(request, username_slug):
 
 
 def search(request):
-    context_dict = {}
+    searched = ''
+    
+    if request.method == 'POST':
+        searched = request.POST.get('searched', '')
 
-    post_list = Post.objects.order_by('-date')
+    context_dict = {'searched':searched}
+    if searched == '':
+        post_list = Post.objects.order_by('-date')
+    else:
+        post_list = Post.objects.filter(title__contains=searched)
 
     context_dict['posts'] = post_list
 

@@ -73,3 +73,23 @@ body {
     padding-right:250px;
     padding-top:120px;
 }
+
+.search-post-list-display{
+    margin: auto;
+    width: 500px;
+}
+
+.search-input-bar{
+    width:85%;
+    margin-left: 1%;
+}
+
+.post-title-text{
+    text-align: center;
+}
+
+.post-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

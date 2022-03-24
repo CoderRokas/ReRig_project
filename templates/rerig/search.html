@@ -12,8 +12,36 @@
     {% endblock %}
 
     {% block body_block %}
-        <p>This is the Search page.</p>
+    <div class="search-post-list-display">
+        <form action="{% url 'rerig:search' %}" method="POST">
+            {% csrf_token %}
 
+            <input type="search" placeholder="search" class="search-input-bar" name="searched">
+            
+            <input type="submit" value="Search">
+        </form>
+
+        {% if searched %}
+        <h2>You searched for {{ searched }}</h2>
+
+        {% else %}
+        <h2>Type above to search for a post</h2>
+        {% endif %}
+        <div> 
+            {% if posts %}
+                {% for post in posts %}
+                <div>
+                    <h3 class="post-title-text">{{ post.title }}</h3>
+                    <div class="post-image"> 
+                        <a href="/rerig/post/{{ post.id }}"><img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" /></a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <strong>There are no posts present.</strong>
+            {% endif %}
+        </div>
+    </div>
 
     {% endblock %}
 </html>
