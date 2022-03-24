@@ -17,9 +17,9 @@ def populate():
 	users_objects = {}
 
 	posts = [
-		{'username' : 'Bob', 'title' : 'post1', 'description' : 'A very interesting description', 'averageRating' : 5, 'category' : 'desktop', 'date':datetime.datetime(2020,10,10)},
+		{'username' : 'Bob', 'title' : 'post1', 'description' : 'A very interesting description', 'averageRating' : 4, 'category' : 'desktop', 'date':datetime.datetime(2020,10,10)},
 		{'username' : 'Alex', 'title' : 'post2', 'description' : 'A very interesting description', 'averageRating' : 2, 'category' : 'desktop', 'date':datetime.datetime(2019,11,21)},
-		{'username' : 'Alex', 'title' : 'post3', 'description' : 'A very interesting description', 'averageRating' : 4, 'category' : 'laptop', 'date':datetime.datetime(2020,9,10)}
+		{'username' : 'Alex', 'title' : 'post3', 'description' : 'A very interesting description', 'averageRating' : 2, 'category' : 'laptop', 'date':datetime.datetime(2020,9,10)}
 	]
 
 	posts_objects = {}
@@ -27,7 +27,7 @@ def populate():
 	reviews = [
 		{'username' : 'Bob', 'post_title' : 'post1', 'score' : 4, 'comment' : 'This is good', 'date':datetime.datetime(2020,10,10)},
 		{'username' : 'Bob', 'post_title' : 'post2', 'score' : 2, 'comment' : 'This is average', 'date':datetime.datetime(2020,3,10)},
-		{'username' : 'Bob', 'post_title' : 'post2', 'score' : 2, 'comment' : 'This is average', 'date':datetime.datetime(2020,5,10)}
+		{'username' : 'Tom', 'post_title' : 'post2', 'score' : 2, 'comment' : 'This is average', 'date':datetime.datetime(2020,5,10)}
 	]
 
 	for new_user in new_users:

@@ -12,9 +12,10 @@
     {% endblock %}
 
     {% block body_block %}
-        <form id="login_form" method="post" action="{% url 'rerig:login' %}">
+        <form method="post" action="{% url 'rerig:login' %}">
             {% csrf_token %}
             Username: <input type="text" name="username" value="" size="50" />
+            <br />
             <br />
             Password: <input type="password" name="password" value="" size="50" />
             <br />

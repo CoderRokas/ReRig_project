@@ -18,8 +18,17 @@ h1,#logo{
     right:20px;
 }
 
-h2 {
+#postImage{
+    height:500px;
+    width:500px;
+}
+
+h2,#navbar,#Container{
     text-align: center;
+}
+
+#user_form{
+    float:left;
 }
 
 ul > li {
@@ -39,11 +48,6 @@ ul > li {
     padding-left:4vw;
     padding-right:4vw;
 }
-
-#navbar{
-    text-align:center;
-}
-
 
 .navButtons:hover {
     color: blueviolet;
