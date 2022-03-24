@@ -16,16 +16,20 @@
             <strong>thank you for registering!</strong>
             <a href="{% url 'rerig:index' %}">Return to the homepage.</a><br />
         {% else %}
-            <form id="user_form" method="post" action="{% url 'rerig:register' %}" enctype="multipart/form-data">
+            <div style="width:270px; margin:0 auto; text-align: center">
+            <br id="user_form" method="post" action="{% url 'rerig:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form.as_p }}
             {{ profile_form.as_p }}
+                <br/>
 
             <input type="submit" name="submit" value="Register" />
+                <br/>
             <p>Or click here to login:</p>
             <br />
             <a href="{% url 'rerig:login' %}">Login</a>
         </form>
+            </div>
         {% endif %}
     {% endblock %}
 </html>
