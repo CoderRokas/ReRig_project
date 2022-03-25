@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import Sum
+import os
 
 from rerig.forms import UserForm, PostForm, UpdateUserForm, UpdateProfileForm, ReviewForm
 from rerig.models import Post, Review, Profile
@@ -73,19 +74,17 @@ def register(request):
 @login_required
 def account(request, username_slug):
     if request.method == 'POST':
-        user_form = UpdateUserForm(request.POST, instance=request.user)
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
+        user = User.objects.get(username=username_slug)
+        profile_form = UpdateProfileForm(request.POST, request.FILES)
+        
+        if profile_form.is_valid():
+            os.remove(user.profile.picture.path)
+            user.profile.picture = request.FILES['picture']
             user.save()
-            profile_form.save()
     else:
-        user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    context_dict = {'user_form': user_form, 'profile_form': profile_form}
+    context_dict = {'profile_form': profile_form}
     u = User.objects.get(username=username_slug)
     context_dict['userProfile'] = u.profile
 

@@ -16,7 +16,7 @@
             <strong>thank you for registering!</strong>
             <a href="{% url 'rerig:index' %}">Return to the homepage.</a><br />
         {% else %}
-            <div style="width:270px; margin:0 auto; text-align: center">
+            <div id="registerContainer">
             <br id="user_form" method="post" action="{% url 'rerig:register' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form.as_p }}

@@ -67,11 +67,14 @@ body {
     background-color: beige;
 }
 
-.aboutSection{
+#aboutSection{
     font-size:18px;
     padding-left:250px;
     padding-right:250px;
     padding-top:120px;
+    width:600px;
+    margin:0 auto;
+    text-align: center;
 }
 
 .search-post-list-display{
@@ -92,4 +95,16 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+#loginContainer{
+    width:800px;
+    margin:0 auto;
+    text-align: center;
+}
+
+#registerContainer{
+    width:270px;
+    margin:0 auto;
+    text-align: center
 }

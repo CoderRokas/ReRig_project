@@ -9,9 +9,9 @@ from django.contrib.auth.models import User
 
 def populate():
 	new_users = [
-		{'username' : 'Bob', 'password' : '123'},
-		{'username' : 'Alex', 'password' : 'abc'},
-		{'username' : 'Tom', 'password' : 'password'},
+		{'username' : 'Bob', 'password' : '123', 'picture':'profile_test_images/test1.jpg'},
+		{'username' : 'Alex', 'password' : 'abc', 'picture':'profile_test_images/test2.jpg'},
+		{'username' : 'Tom', 'password' : 'password', 'picture':'profile_test_images/test3.jpg'},
 	]
 
 	users_objects = {}
@@ -31,7 +31,7 @@ def populate():
 	]
 
 	for new_user in new_users:
-		u = add_user(new_user['username'], new_user['password'])
+		u = add_user(new_user['username'], new_user['password'], new_user['picture'])
 		users_objects[new_user['username']] = u
 	
 	for post in posts:
@@ -53,8 +53,9 @@ def populate():
 		for r in Review.objects.filter(author=u):
 			print('-',r)
 
-def add_user(username, password):
+def add_user(username, password, picture):
 	u = User.objects.create_user(username=username, password=password)
+	u.profile.picture=picture
 	u.save()
 	return u
 
