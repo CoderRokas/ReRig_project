@@ -28,29 +28,7 @@
 
         </div>
         <hr>
-        <div>
-            {% for review in post.review_set.all %}
-                <div style="margin: 50px">
-                    <div style="display: inline-flex">
-                        <img src="{{ MEDIA_URL }}{{ review.author.profile.picture }}" alt="avatar"
-                             style="height: 50px;width: 50px;border-radius:50%;"/>
-                        <p style="text-align: left;margin: 5px 15px;">
-                            {{ review.author.username }} <br>{{ review.date }}
-                        </p>
-
-                    </div>
-                    <p>
-                        {{ review.score }} points
-                    </p>
-                    <p>
-                        {{ review.comment }}
-                    </p>
-                </div>
-
-            {% endfor %}
-        </div>
-        <hr>
-        <div style="margin: 50px">
+    <div style="margin: 50px">
             <style type="text/css">
                 .cleanfloat::after {
                     display: block;
@@ -94,7 +72,33 @@
                     <a href="{% url 'rerig:login' %}">Please login to comment!</a>
                 {% endif %}
             </form>
+        <hr>
         </div>
+    Reviews:<br/>
+        <div>
+            {% for review in post.review_set.all %}
+                <div style="margin: 50px">
+                    <div style="display: inline-flex">
+                        <img src="{{ MEDIA_URL }}{{ review.author.profile.picture }}" alt="avatar"
+                             style="height: 50px;width: 50px;border-radius:50%;"/>
+                        <p style="text-align: left;margin: 5px 15px;">
+                            {{ review.author.username }} <br>{{ review.date }}
+                        </p>
+
+                    </div>
+                    <p>
+                        {{ review.score }} points
+                    </p>
+                    <p>
+                        {{ review.comment }}
+                    </p>
+                </div>
+
+            {% endfor %}
+        </div>
+        <hr>
+    End of reviews.
+
     </div>
 
 
