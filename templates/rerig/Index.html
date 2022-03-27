@@ -12,15 +12,18 @@
 
     <!-- photo carousel to go here -->
 
-    <div id="Container">
+    <div class="post-list-display">
         <h2>The most liked photos:</h2>
-        <div id="carousel"> 
+        <div> 
             {% if posts %}
-                {% for post in posts %}
-                    <div id="carousel-item"> 
-                        <a href="/rerig/post/{{ post.id }}"><img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" /></a>
-                    </div>
-                {% endfor %}
+            {% for post in posts %}
+            <div class="post-container">
+                <h3 class="post-title-text">{{ post.title }}</h3>
+                <div class="post-image"> 
+                    <a href="/rerig/post/{{ post.id }}"><img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" /></a>
+                </div>
+            </div>
+            {% endfor %}
             {% else %}
                 <strong>There are no posts present.</strong>
             {% endif %}

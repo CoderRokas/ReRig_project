@@ -95,7 +95,7 @@ body {
     text-align: center;
 }
 
-.search-post-list-display{
+.post-list-display{
     margin: auto;
     width: 500px;
 }
@@ -168,4 +168,8 @@ body {
 
 .hs, .cs {
     color: #f00;
+}
+
+.post-container:hover{
+    background-color: rgb(224, 224, 190);
 }

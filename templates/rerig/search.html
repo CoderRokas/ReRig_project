@@ -12,7 +12,7 @@
     {% endblock %}
 
     {% block body_block %}
-    <div class="search-post-list-display">
+    <div class="post-list-display">
         <form action="{% url 'rerig:search' %}" method="POST">
             {% csrf_token %}
 
@@ -30,7 +30,7 @@
         <div> 
             {% if posts %}
                 {% for post in posts %}
-                <div>
+                <div class="post-container">
                     <h3 class="post-title-text">{{ post.title }}</h3>
                     <div class="post-image"> 
                         <a href="/rerig/post/{{ post.id }}"><img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" /></a>
