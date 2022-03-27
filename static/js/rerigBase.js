@@ -14,11 +14,6 @@ function goToAccount(username) {
     window.location = '/rerig/account/'+ username;
 }
 
-function goToPost(id) {
-    console.log(id)
-    window.location = '/rerig/post/' + String(id);
-}
-
 function goToLogin() {
     window.location = '/rerig/login/';
 }

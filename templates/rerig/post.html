@@ -11,11 +11,11 @@
 {% endblock %}
 
 {% block body_block %}
-    <div style="text-align: center">
-        <div style="display: inline-flex">
+    <div class = "post-title-text">
+        <div class = "post-username">
             <img src="{{ MEDIA_URL }}{{ post.author.profile.picture }}" alt="avatar"
                  id="avatar2"/>
-            <p style="text-align: left;margin: 5px 15px;">
+            <p class = "post-starting">
                 {{ post.author.username }} <br>{{ post.date }}
             </p>
         </div>
@@ -28,35 +28,14 @@
 
         </div>
         <hr>
-    <div style="margin: 50px">
-            <style type="text/css">
-                .cleanfloat::after {
-                    display: block;
-                    clear: both;
-                    content: "";
-                    visibility: hidden;
-                    height: 0;
-                }
+    <div class = "post-comment">
 
-                .cleanfloat ul li {
-                    list-style: none;
-                    float: left;
-                    font-size: 30px;
-                    margin: 5px;
-                    color: #ccc;
-                    cursor: pointer;
-                }
-
-                .hs, .cs {
-                    color: #f00;
-                }
-            </style>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ review_form.as_p }}
-                <div style="display: inline-table">
+                <div class="post-rating1">
                     Leave your rating:
-                    <ul class="cleanfloat" style="font-size: 30px; margin: 0px;">
+                    <ul class="cleanfloat post-rating2" >
                         <li value="1">★</li>
                         <li value="2">★</li>
                         <li value="3">★</li>
@@ -77,11 +56,11 @@
     Reviews:<br/>
         <div>
             {% for review in post.review_set.all %}
-                <div style="margin: 50px">
-                    <div style="display: inline-flex">
+                <div class = "post-comment">
+                    <div class = "post-comment2">
                         <img src="{{ MEDIA_URL }}{{ review.author.profile.picture }}" alt="avatar"
-                             style="height: 50px;width: 50px;border-radius:50%;"/>
-                        <p style="text-align: left;margin: 5px 15px;">
+                             class = "post-review-profile"/>
+                        <p class = "post-starting">
                             {{ review.author.username }} <br>{{ review.date }}
                         </p>
 
@@ -103,22 +82,5 @@
 
 
     <script src="{% static 'js/jquery.min.js' %}" crossorigin="anonymous"></script>
-    <script>
-        $(function () {
-            $("ul li").hover(function () {
-                $(this).addClass('hs');
-                $(this).prevAll().addClass('hs');
-            }, function () {
-                $(this).removeClass('hs');
-                $(this).prevAll().removeClass('hs');
-            })
 
-            $("ul li").click(function () {
-                $(this).addClass('cs');
-                $(this).prevAll().addClass('cs');
-                $(this).nextAll().removeClass('cs');
-                $("#id_score").val($(this).val())
-            })
-        })
-    </script>
 {% endblock %}

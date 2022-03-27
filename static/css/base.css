@@ -105,16 +105,6 @@ body {
     margin-left: 1%;
 }
 
-.post-title-text{
-    text-align: center;
-}
-
-.post-image{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #loginContainer{
     width:800px;
     margin:0 auto;
@@ -125,4 +115,57 @@ body {
     width:270px;
     margin:0 auto;
     text-align: center
+}
+
+.cleanfloat::after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+
+
+.post-title-text{
+    text-align: center;
+}
+
+.post-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-username{
+    display: inline-flex;
+}
+.post-starting{
+    text-align: left;margin: 5px 15px;
+}
+.post-comment{
+    margin: 50px;
+}
+.post-rating2{
+    font-size: 30px; margin: 0px;
+}
+.post-rating1{
+    display: inline-table;
+}
+.post-comment2{
+    display: inline-flex ;
+}
+.post-review-profile{
+    height: 50px;width: 50px;border-radius:50%;
+}
+.cleanfloat ul li {
+    list-style: none;
+    float: left;
+    font-size: 30px;
+    margin: 5px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.hs, .cs {
+    color: #f00;
 }
