@@ -23,6 +23,24 @@ h1,#logo{
     width:500px;
 }
 
+#avatar{
+    height: 100px;
+    width: 100px;
+    border-radius:50%;
+}
+
+#avatar2{
+    height: 50px;
+    width: 50px;
+    border-radius:50%;
+}
+
+#postContainer{
+    width:800px;
+    margin:0 auto;
+    text-align: center;
+}
+
 h2,#navbar,#Container{
     text-align: center;
 }

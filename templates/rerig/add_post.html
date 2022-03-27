@@ -13,7 +13,7 @@
 
 {% block body_block %}
     <body>
-    <div style="width:800px; margin:0 auto; text-align: center"><br/><br/><br/>
+    <div id="postContainer"><br/><br/><br/>
         <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
             {{ post_form.as_p }}
             <input type="submit" value="Post">

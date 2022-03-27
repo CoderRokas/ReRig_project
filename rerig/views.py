@@ -1,4 +1,5 @@
 from unicodedata import category
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import Http404
@@ -40,10 +41,11 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('rerig:index'))
             else:
-                return HttpResponse("Your Rango account is disabled")
+                return HttpResponse("Your Rerig account is disabled")
         else:
             print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied")
+            error = "Invalid username or password"
+            return render(request, 'rerig/login.html', {'error':error})
     else:
         return render(request, 'rerig/login.html')
 

@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block body_block %}
-    <div style="text-align: center">
+    <div id="Container">
         <div>
             <img src="{{ MEDIA_URL }}{{ user.profile.picture }}" alt="avatar"
-                 style="height: 100px;width: 100px;border-radius:50%;"/>
+                 id="avatar"/>
         </div>
         <h2>
             {% block title_block %}
