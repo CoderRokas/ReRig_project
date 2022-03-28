@@ -1,12 +1,12 @@
 # ReRig_project
 
-External sources:
-Django==2.2.26
-Pillow==9.0.0
-pytz==2021.3
-sqlparse==0.4.2
-wincertstore==0.2
-JQuery
+External sources: <br/>
+Django==2.2.26 <br/>
+Pillow==9.0.0 <br/>
+pytz==2021.3 <br/>
+sqlparse==0.4.2 <br/>
+wincertstore==0.2 <br/>
+JQuery <br/>
 
 
 1.When running our project you first need to create a database:
