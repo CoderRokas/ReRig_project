@@ -17,13 +17,15 @@
         <div> 
             {% if posts %}
             {% for post in posts %}
+            <a href="{% url 'rerig:show_post' post.id %}">
             <div class="post-container">
                 <h3 class="post-title-text">{{ post.title }}</h3>
                 <div class="post-display-rating">Average Rating: {{ post.averageRating }}</div>
                 <div class="post-image"> 
-                    <a href="/rerig/post/{{ post.id }}"><img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" /></a>
+                    <img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" />
                 </div>
             </div>
+            </a>
             {% endfor %}
             {% else %}
                 <strong>There are no posts present.</strong>

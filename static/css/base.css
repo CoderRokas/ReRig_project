@@ -3,6 +3,11 @@ h1 {
     text-align:center;
 }
 
+a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
 h1,#logo{
     vertical-align: middle;
     display:inline-block;
@@ -168,6 +173,10 @@ body {
 
 .hs, .cs {
     color: #f00;
+}
+
+.post-container{
+    cursor: pointer;
 }
 
 .post-container:hover{
