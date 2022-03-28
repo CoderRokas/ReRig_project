@@ -48,7 +48,7 @@
                  {% if request.user.is_authenticated %}
                     <input type="submit" value="Comment">
                 {% else %}
-                    <a href="{% url 'rerig:login' %}">Please login to comment!</a>
+                    <a class = 'underline' href="{% url 'rerig:login' %}">Please login to comment!</a>
                 {% endif %}
             </form>
         <hr>
