@@ -173,3 +173,7 @@ body {
 .post-container:hover{
     background-color: rgb(224, 224, 190);
 }
+
+.post-display-rating{
+    text-align: center;
+}

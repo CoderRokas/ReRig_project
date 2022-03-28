@@ -32,7 +32,8 @@
                 {% for post in posts %}
                 <div class="post-container">
                     <h3 class="post-title-text">{{ post.title }}</h3>
-                    <div class="post-image"> 
+                    <div class="post-display-rating">Average Rating: {{ post.averageRating }}</div>
+                    <div class="post-image">
                         <a href="/rerig/post/{{ post.id }}"><img id="postImage" src="{{ MEDIA_URL }}{{ post.picture }}" alt="post-picture" /></a>
                     </div>
                 </div>
